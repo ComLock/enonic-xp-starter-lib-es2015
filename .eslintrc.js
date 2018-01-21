@@ -30,6 +30,7 @@ module.exports = {
             ignoreStrings: true,
             ignoreTemplateLiterals: true,
         }],
+        'no-cond-assign': ['error', 'except-parens'],
         'no-multi-spaces': ['off'],
         'no-underscore-dangle': ['error', {
             allow: [

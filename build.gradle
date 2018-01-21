@@ -1,7 +1,8 @@
 plugins {
-    id 'java'
+    id 'java' // Needed for assemble and build
     id 'com.enonic.defaults' version '1.0.3'
-    //id 'com.enonic.xp.run' version '1.0.11'
+    id 'com.enonic.xp.base' version '1.0.15' // Found here https://github.com/enonic/lib-admin-ui/blob/master/build.gradle
+    //id 'com.enonic.xp.run' version '1.0.11' // Just for apps?
     id "com.moowork.node" version "1.2.0"
 }
 
@@ -12,17 +13,11 @@ repositories {
 }
 
 
-app {
-    name = project.appName
-    displayName = "Enonic Developer Site"
-    vendorName = 'Enonic AS'
-    vendorUrl = 'http://enonic.com'
-}
-
-
 dependencies {
-    compile "com.enonic.xp:core-api:${xpVersion}"
-    compile "com.enonic.xp:portal-api:${xpVersion}"
+    //compile "com.enonic.xp:core-api:${xpVersion}" // Just for apps?
+    //compile "com.enonic.xp:portal-api:${xpVersion}" // Just for apps?
+    //compile "com.enonic.xp:lib-content:${xpVersion}"
+    //compile "com.enonic.xp:lib-portal:${xpVersion}"
 }
 
 
