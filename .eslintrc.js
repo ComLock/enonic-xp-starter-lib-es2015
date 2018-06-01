@@ -4,10 +4,29 @@ module.exports = {
     extends: 'airbnb-base',
 
     globals: {
-      app: false,
-      log: false,
-      resolve: false,
-      __: false
+
+        // Nashorn
+        Java: false,
+
+        // Enonic XP
+        app: false,
+        log: false,
+        resolve: false,
+        __: false,
+
+        // Mocha
+        //describe: false,
+        //it: false,
+
+        // Client-side js
+        //console: false,
+        //document: false,
+        //window: false,
+
+        // Jquery
+        //$: false,
+        //jQuery: false,
+
     },
     rules: { // https://eslint.org/docs/rules
         'comma-dangle': ['error', {
