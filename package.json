@@ -13,6 +13,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "glob": "^7.1.2",
+    "lodash": "^4.17.10",
     "mocha": "^5.2.0",
     "path": "^0.12.7",
     "webpack": "^4.16.5",
