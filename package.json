@@ -27,7 +27,7 @@
   "scripts": {
     "mocha": "node_modules/.bin/mocha -c --require babel-core/register",
     "test": "node_modules/.bin/mocha -c --require babel-core/register -- test/**/*.es*",
-    "watch": "node_modules/webpack-cli/bin/cli.js -w --stdin",
-    "webpack": "node_modules/webpack-cli/bin/cli.js"
+    "webpack": "node_modules/webpack-cli/bin/cli.js",
+    "webpack:watch": "node_modules/webpack-cli/bin/cli.js -w --stdin"
   }
 }
