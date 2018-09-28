@@ -17,6 +17,7 @@ const dict = arr => Object.assign(...arr.map(([k, v]) => ({ [k]: v })));
 //──────────────────────────────────────────────────────────────────────────────
 // Constants
 //──────────────────────────────────────────────────────────────────────────────
+const MODE = 'production';
 const EXTENSIONS_GLOB = '{es,js}';
 const SRC_DIR = 'src/main/resources';
 const SRC_DIR_ABS = path.resolve(__dirname, SRC_DIR);
@@ -34,6 +35,10 @@ if (!FILES.length) {
 	process.exit();
 }
 //console.log(`FILES:${toStr(FILES)}`);
+if (!FILES.length) {
+	console.error('Webpack did not find any files to process!');
+	process.exit();
+}
 
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -49,7 +54,7 @@ const WEBPACK_CONFIG = {
 		/\/lib\/(enonic|xp)/
 	],
 	devtool: false, // Don't waste time generating sourceMaps
-	mode: 'production',
+	mode: MODE,
 	module: {
 		rules: [{
 			test: /\.(es6?|js)$/, // Will need js for node module depenencies
@@ -61,17 +66,11 @@ const WEBPACK_CONFIG = {
 					compact: false,
 					minified: false,
 					plugins: [
-						'array-includes',
-						'optimize-starts-with',
-						'transform-object-assign',
-						'transform-object-rest-spread'
+						'@babel/plugin-proposal-object-rest-spread',
+						'@babel/plugin-transform-object-assign',
+						'array-includes'
 					],
-					presets: [
-						['es2015', {
-							loose: true,
-							modules: false
-						}]
-					]
+					presets: ['@babel/preset-env']
 				} // options
 			}] // use
 		}] // rules

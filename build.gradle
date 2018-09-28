@@ -1,28 +1,36 @@
 plugins {
-    id 'java' // Needed for assemble and build
-    id 'com.enonic.defaults' version '1.0.3'
-    id 'com.enonic.xp.base' version '1.0.15' // Found here https://github.com/enonic/lib-admin-ui/blob/master/build.gradle
-    //id 'com.enonic.xp.run' version '1.0.11' // Just for apps?
-    id "com.moowork.node" version "1.2.0"
+	id 'java' // Needed for assemble and build
+	//id 'maven' // When is this needed?
+	id 'com.enonic.defaults' version '2.0.0'
+	id 'com.moowork.node' version '1.2.0'
 }
 
 
 repositories {
-    jcenter()
-    xp.enonicRepo()
+	mavenLocal()
+	jcenter()
+	maven {url 'http://repo.enonic.com/public'}
 }
 
 
 dependencies {
-    //compile "com.enonic.xp:core-api:${xpVersion}" // Just for apps?
-    //compile "com.enonic.xp:portal-api:${xpVersion}" // Just for apps?
-    //compile "com.enonic.xp:lib-content:${xpVersion}"
-    //compile "com.enonic.xp:lib-portal:${xpVersion}"
+	//compile "com.enonic.xp:script-api:${xpVersion}" // Only needed if you lib has java code
+	//compile "com.enonic.xp:core-api:${xpVersion}" // Just for apps?
+	//compile "com.enonic.xp:portal-api:${xpVersion}" // Just for apps?
+	//compile "com.enonic.xp:lib-content:${xpVersion}"
+	//compile "com.enonic.xp:lib-portal:${xpVersion}"
+}
+
+
+processResources {
+	exclude '**/.gitkeep'
+	exclude '**/*.es'
+	exclude '**/*.js' // Let webpack handle them instead
 }
 
 
 tasks.withType(Copy) {
-  includeEmptyDirs = false
+	includeEmptyDirs = false
 }
 
 
@@ -30,7 +38,7 @@ tasks.withType(Copy) {
 // Gradle wrapper
 //──────────────────────────────────────────────────────────────────────────────
 task wrapper(type: Wrapper) {
-	gradleVersion = '4.9'
+	gradleVersion = '4.10.2'
 }
 
 
@@ -38,34 +46,23 @@ task wrapper(type: Wrapper) {
 // Gradle node plugin
 //──────────────────────────────────────────────────────────────────────────────
 node {
-    version '8.11.4'
-    download true
+	version '8.12.0'
+	download true
 }
 
 
 //──────────────────────────────────────────────────────────────────────────────
 // Webpack
 //──────────────────────────────────────────────────────────────────────────────
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources { // Paths relative to src/main/resources
-            exclude '**/*.es' // Avoid having your es files copied into ./build
-            exclude '**/*.js' // Let webpack do it's thing
-        }
-    }
-}
-
-
 task webpack(type:NodeTask) {
-    script = file('node_modules/webpack-cli/bin/cli.js')
-    args = [
-        '--color'
-    ]
+	script = file('node_modules/webpack-cli/bin/cli.js')
+	args = [
+		'--color'
+	]
 }
+
 webpack.dependsOn npmInstall
 webpack.mustRunAfter npmInstall
+
 assemble.dependsOn webpack
 assemble.mustRunAfter webpack

@@ -1,9 +1,8 @@
 {
-  "plugins": [
-    "array-includes",
-    "optimize-starts-with",
-    "transform-object-assign",
-    "transform-object-rest-spread"
-  ],
-  "presets": ["env"]
+	"plugins": [
+		"@babel/plugin-proposal-object-rest-spread",
+		"@babel/plugin-transform-object-assign",
+		"array-includes"
+	],
+	"presets": ["@babel/preset-env"]
 }
