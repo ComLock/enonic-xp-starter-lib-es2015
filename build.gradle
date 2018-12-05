@@ -69,14 +69,14 @@ node {
 // Webpack
 //──────────────────────────────────────────────────────────────────────────────
 task webpack(type:NodeTask) {
+	dependsOn npmInstall
+	mustRunAfter npmInstall
 	script = file('node_modules/webpack-cli/bin/cli.js')
 	args = [
 		'--color'
 	]
+	outputs.dir './build/resources/main/lib/' // processResources will delete the directory if this is not present
 }
-
-webpack.dependsOn npmInstall
-webpack.mustRunAfter npmInstall
 
 
 processResources {
