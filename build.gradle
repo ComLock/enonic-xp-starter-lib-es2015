@@ -60,7 +60,7 @@ task wrapper(type: Wrapper) {
 // Gradle node plugin
 //──────────────────────────────────────────────────────────────────────────────
 node {
-	version '10.14.2'
+	version '10.15.0'
 	download true
 }
 
